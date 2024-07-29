@@ -1,0 +1,1 @@
+docker run --rm --volume "`pwd`:/data" --user `id -u`:`id -g` pandoc/latex --toc=true --pdf-engine=xelatex title.txt page-test.markdown -o test.pdf
