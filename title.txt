@@ -1,7 +1,0 @@
----
-title: Testing
-author:
-- Alfredo Goldman vel Lejbman
-- Lucas de Sousa Rosa
-lang: pt-BR
----
