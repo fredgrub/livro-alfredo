@@ -1,0 +1,235 @@
+# Usando o Interpretador (REPL) como Calculadora
+
+Objetivo: Ver o interpretador de Julia como uma calculadora poderosa, introduzir a noção de variáveis.
+
+## Começando com o modo interativo do Julia
+
+Quem quiser já pode instalar o ambiente de programação, usem esse [link](https://julialang.org/).
+
+Dentro do Julia (após chamar julia na linha de comando), vamos começar com contas com números inteiros:
+
+```{julia}
+1 + 2
+```
+
+
+```{julia}
+40 * 4
+```
+
+Sim, como era de se esperar, podemos em Julia usar os operandos: `+`, `-` e `*`, o resultado será como o esperado. Vejamos a seguir que com a divisão fica um pouco diferente:
+
+
+```{julia}
+84 / 2
+```
+
+Notem que nesse caso, houve uma mudança de tipos, pois 84 e 2 são inteiros e o resultado é um número em ponto flutuante (float), podemos ver isso, pois ao invés de 42, tivemos como resultado 42.0.
+
+Também é possível pedir o resultado inteiro usando o operador `div`:
+
+```{julia}
+div(84,2)
+```
+
+Ou de forma equivalente usando o operador `\div` (para conseguir ver o símbolo da divisão é necessário digitar `\div` seguido da tecla `<tab>`).
+
+Além das contas básicas, também dá para fazer a exponenciação:
+
+```{julia}
+2^31
+```
+
+Expressões mais complexas também podem ser calculadas:
+
+```{julia}
+23 + 2 * 2 + 3 * 4
+```
+
+Sim, a precedência de operadores usual também é válida em Julia. Mas, segue a primeira lição de programação: *Escreva para humanos, não para máquinas*.
+
+```{julia}
+23 + (2 * 2) + (3 * 4)
+```
+
+Em Julia também podemos fazer operações com números em ponto flutuante:
+
+```{julia}
+23.5 * 3.14
+```
+
+ou
+
+```{julia}
+12.5 / 2.0
+```
+
+Acima temos mais um exemplo de código escrito para pessoas, ao se escrever 2.0 estamos deixando claro que o segundo parâmetro é um número float.
+
+É importante saber que números em ponto flutuante tem precisão limitada, logo não se espante com resultados inesperados como abaixo:
+
+```{julia}
+1.2 - 1.0
+```
+
+Erros como esse são bastante raros, tanto que usualmente confiamos plenamente nas contas feitas com computadores e calculadoras. Mas, é bom saber que existem limitações.
+
+```{julia}
+2.6 - 0.7 - 1.9
+```
+
+ou
+
+```{julia}
+0.1 + 0.2
+```
+
+ou ainda
+
+```{julia}
+10e15 + 1 - 10e15
+```
+
+Esses problemas de precisão estão ligados a limitação de como os números são representados no computador. De maneira simplificada, os valores no computador são codificados em palavras, formadas por bits. Nos computadores modernos as palavras tem 64 bits, ou 8 bytes. Logo, uma outra limitação está ligada aos números inteiros muito grandes
+
+```{julia}
+2^63
+```
+
+Mas, para um curso introdutório basta saber que existem essas limitações. Como lidar com elas é parte de um curso mais avançado.
+
+É importante notar que o erro acima é um *erro silencioso*, ou seja quanto estamos usando números inteiros, pode ocorrer que o número a ser representado não caiba no número de bits disponível, o que faz com que ocorra um erro.
+
+Voltando para as contas. Um outro operador interessante é o `%` que faz o resto da divisão
+
+```{julia}
+4 % 3
+```
+
+Até agora vimos como trabalhar com um único valor, ou seja, como se fosse no visor de uma calculadora. Mas, é possível ir além. Ao invés de termos teclas de memória, o computador nos oferece variáveis. Elas são como nomes para valores que queremos guardar e usar mais tarde.
+
+Além das operações básicas também temos as operações matemáticas (funções), como por exemplo o seno, sin em inglês. Para saber como uma função funciona podemos pedir ajuda ao ambiente, usando uma `?` ou o macro `@doc`, e em seguida digitando o que queremos saber, como por exemplo em:
+
+```{julia}
+#| eval: false
+@doc sin
+```
+
+Notem que nem tudo que foi apresentado faz sentido no momento, mas já dá para entender o uso de uma função como sin. Vejamos agora a raiz quadrada:
+
+```{julia}
+#| eval: false
+@doc sqrt
+```
+
+Nela vemos que é possível calcular a raiz como em:
+
+```{julia}
+sqrt(4)
+```
+
+```{julia}
+sqrt(4.0)
+```
+
+Mas, observamos também na documentação a função `big()`, que tem a seguinte ajuda:
+
+```{julia}
+#| eval: false
+@doc BigInt
+```
+
+Com números BigInt, já não há problemas de estouro, como podemos ver abaixo:
+
+```{julia}
+big(2) ^ 1002
+```
+
+## Variáveis e seus tipos
+
+Em Julia também temos o conceito de variáveis, que servem para armazenar os diferentes conteúdos de dados possíveis.
+
+```{julia}
+a = 7
+2 + a
+```
+
+
+
+É importante notar que as variáveis em Julia podem receber novos valores e o tipo da variável depende do que foi atribuído por último.
+
+```{julia}
+a = 3
+a = a + 1
+typeof(a)
+```
+
+Aproveitando o momento, podemos ver que há vários tipos primitivos em Julia, sendo os principais:
+
+```{julia}
+typeof(1)
+typeof(1.1)
+typeof("Bom dia")
+```
+
+Falando em Strings, elas são definidas por conjuntos de caracteres entre aspas como:
+
+```{julia}
+s1 = "Olha que legal"
+s2 = "Outra String"
+```
+
+Dá também para fazer operações com strings como concatenação:
+
+```{julia}
+s1 = "Tenha um"
+s2 = " Bom dia"
+s3 = s1 * s2
+```
+
+Ou potência:
+
+```{julia}
+s = "Nao vou mais fazer coisas que possam desagradar os meus colegas "
+s ^ 10
+```
+
+Ainda sobre variáveis, há umas regras com relação aos seus nomes, tem que começar com uma letra (ou com `_`), pode ter dígitos e não pode ser uma palavra reservada. É bom notar que Julia por ser uma linguagem moderna, aceita nomes de caracteres em unicode, por exemplo o Δ (`\Delta`):
+
+```{julia}
+Δ = 2
+```
+
+Mas, a linguagem vai bem além com caracteres de animais e símbolos:
+
+```{julia}
+🐱 = 5 # \:cat: <tab>
+🐶 = 3 # \:dog: <tab>
+🏠 = 20 # \:house: <tab>
+```
+
+Isso não adiciona nada do lado de algoritmos, mas é possível ter variáveis bem bonitinhas. A lista de figuras pode ser encontrada [aqui](https://docs.julialang.org/en/v1/manual/unicode-input/).
+
+## Saída de dados
+Para fazer saídas usam-se dois comandos, `print()` e o `println()`, sendo que o primeiro não pula linha e o segundo pula.
+
+```{julia}
+print("Hello ")
+println("World!")
+println("Ola, mundo!")
+```
+
+Para evitar que se digitem muitos caracteres, por vezes podemos usar "açucares sintáticos".
+
+```{julia}
+x = 1
+x = x + 1
+x += 1  # forma equivalente a acima
+```
+
+Acima, vimos a forma de se inserir comentários em Julia (sim esses serão ignorados pelo computador).
+
+
+Exercício:
+Faça o passo a passo para encontrar as raízes da equação de segundo grau $x^2 - 5 x + 6$, usando
+as váriaveis `a`, `b`, `c`, `\Delta`, `x1` e `x2`.

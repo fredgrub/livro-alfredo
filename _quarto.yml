@@ -1,0 +1,42 @@
+project:
+  type: book
+
+lang: pt
+
+book:
+  title: "Nome do Livro"
+  subtitle: "Subtítulo"
+  reader-mode: true
+
+  page-footer:
+    left: |
+      Nota de rodapé a esquerda.
+    right: |
+      Este livro foi feito com <a href="https://quarto.org/">Quarto</a>.
+
+  author:
+    - "Alfredo Goldman"
+    - "Lucas de Sousa Rosa"
+  date: "last-modified"
+  chapters:
+    - index.qmd
+    - aulas/aula1.qmd
+    - aulas/aula2.qmd
+    - aulas/aula3.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    author-meta: "Alfredo Goldman e Lucas de Sousa Rosa"
+    code-fold: false
+    code-line-numbers: false
+  pdf:
+    documentclass: scrreprt
+jupyter: julia-1.10
+ipynb-shell-interactivity: all
+
+
+
