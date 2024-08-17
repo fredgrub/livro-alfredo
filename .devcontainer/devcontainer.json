@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+	"name": "Debian",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/python:1": {
+			"installTools": true,
+			"installJupyterlab": true,
+			"version": "latest"
+		},
+		"ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+			"installTinyTex": true,
+			"version": "latest"
+		},
+		"ghcr.io/julialang/devcontainer-features/julia:1": {
+			"channel": "release"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"quarto.quarto",
+				"julialang.language-julia",
+				"ms-python.python"
+			]
+		}
+	}
+}
