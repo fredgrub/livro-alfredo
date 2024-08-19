@@ -1,0 +1,208 @@
+* Aula 04 - Introdução a Funções
+
+Objetivo: Começar a entender como funcionam as funções
+*** O uso de funções é uma abstração natural
+Na aula passada já vimos umas funções e isso foi bem natural, foram elas:
+- typeof() - Dado um parâmetro devolve o seu tipo, sim variáveis estão
+  associadas a tipos
+- div() - Dados dois parâmetros devolve a divisão inteira do primeiro pelo segundo
+- print() e println() - Dados diversos parâmetros os imprime, sem devolver nada
+Inclusive, aqui vale a pena ver que podemos pedir ajuda ao Julia para saber o que fazem as
+funções. Para isso, se usa o ? antes da função:
+#+begin_SRC julia :eval no-export :exports both
+?typeof()
+?div()
+?print()
+#+end_SRC
+
+#+RESULTS:
+
+
+
+Ao fazer isso, inclusive descobrimos que o div() pode ser usado também como \div.
+
+Uma outra função bem útil é a que permite transformar um tipo de valor em outro.
+
+#+begin_SRC julia :eval no-export :exports both
+parse(Float64, "32")
+#+end_SRC
+
+#+RESULTS:
+: 32.0
+
+
+Para conversão de valores em ponto flutuante para inteiros, temos a função trunc.
+
+#+begin_SRC julia :eval no-export :exports both
+trunc(Int64, 2.25)
+#+end_SRC
+
+#+RESULTS:
+: 2
+
+
+De forma inversa temos o float.
+
+#+begin_SRC julia :results output :exports both :eval no-export
+float(2)
+#+end_SRC
+
+#+RESULTS:
+: 2.0
+
+
+
+Finalmente, podemos transformar um valor em uma string, como em:
+
+#+begin_SRC julia :results output :exports both :eval no-export
+string(3)
+#+end_SRC
+
+#+RESULTS:
+: "3"
+
+
+ou
+#+begin_SRC julia :results output :exports both :eval no-export
+string(3.57)
+#+end_SRC
+
+#+RESULTS:
+: "3.57"
+
+
+
+Também tem muitas funções matemáticas prontas como
+- sin(x) - calcula o seno de x em radianos
+- cos(x) - calcula o cosseno de x em radianos
+- tan(x) - calcula a tangente de x em radianos
+- deg2rad(x) - converte x de graus em radianos
+- rad2deg(x) - converte x de radianos em graus
+- log(x) - calcula o logarítmo natural de x
+- log(x, b) - calcula o logarítmo de x na base b
+- log2(x) - calcula o logarítmo de x na base 2
+- log10(x) - calcula o logarítmo de x na base 10
+- exp(x) - calcula o expoente da base natural de x
+- abs(x) - calcula o módulo de x
+- sqrt(x) - calcula a raiz quadrada de x
+- cbrt(x) - raiz cúbica de x
+- factorial(x) - calcula o fatorial de x
+
+A melhor forma de se acostumar a usar as funções é fazendo contas e
+verificando os resultados. Uma dica importante é que para funções mais
+complexas, pode ser que já existam funções prontas em Julia. Para isso
+uma busca com as palavras chave. Um exemplo a seguir para procurar a função
+para o cálculo de seno hiperbólico: "julia lang hiperbolic sin". A busca pelo
+termo em inglês é uma boa dica para buscas em geral.
+
+Em julia também é possível criar funções conforme as suas necessidades, como abaixo:
+#+begin_SRC julia :eval no-export :exports both
+function mensagemDeBomDia()
+   println("Tenha um bom dia!")
+end
+#+end_SRC
+
+#+RESULTS:
+: mensagemDeBomDia (generic function with 1 method)
+
+Para usar uma função, basta chamá-la:
+
+
+#+begin_SRC julia :eval no-export :exports both
+MensagemDeBomDia()
+#+end_SRC
+
+#+RESULTS:
+
+
+Funções, podem receber um ou mais parâmetros:
+
+#+begin_SRC julia :eval no-export :exports both
+function imprime(a)
+   println(" Vou imprimir ", a)
+end
+imprime(42)
+#+end_SRC
+
+#+RESULTS:
+: imprime (generic function with 1 method)
+:  Vou imprimir 42
+
+
+Também é possível que uma função chame outra função como em:
+
+#+begin_SRC julia :eval no-export :exports both
+function imprimeduasvezes(a)
+   imprime(a)
+   imprime(a)
+end
+imprimeduasvezes(13)
+#+end_SRC
+
+#+RESULTS:
+: imprimeduasvezes (generic function with 1 method)
+
+Mais ainda, também é possível diferenciar funções por meio da quantidade
+de parâmetros.
+
+#+begin_SRC julia :eval no-export :exports both
+function recebe(a)
+  println("Recebi um parametro: ", a)
+end
+function recebe(a, b)
+  println("Recebi dois parametros: ", a, " ", b)
+end
+
+#+end_SRC
+
+#+RESULTS:
+: recebe (generic function with 1 method)
+: recebe (generic function with 2 methods)
+
+
+Conforme a chamada, a função chamada será diferente:
+
+#+begin_SRC julia :eval no-export :exports both
+recebe(1)
+recebe(1, 2)
+#+end_SRC
+
+#+RESULTS:
+
+
+Também dá para chamar funções com variáveis e com operações, como
+em:
+
+#+begin_SRC julia :eval no-export :exports both
+a = 10
+recebe(a)
+recebe(a, a + 1)
+#+end_SRC
+
+#+RESULTS:
+: 10
+
+
+
+As funções que vimos até agora imprimem mensagens, mas não devolvem nada.
+O typeof() delas é nothing, ou seja, algo que não pode ser atribuído.
+
+Mas, também é possível fazer funções que devolvem valores, como:
+
+#+begin_SRC julia :eval no-export :exports both
+function soma1(a)
+  return a + 1
+end
+#+end_SRC
+
+Nesse caso, se for passado um parâmetro numérico, a função devolverá o valor
+incrementado (adicionado de 1).
+
+Claro que isso pode ser usado com fórmulas mais complicadas como:
+
+#+begin_SRC julia :eval no-export :exports both
+function hipotenusa(a, b)
+  hip = a * a + b * b
+  return hip
+end
+#+end_SRC
