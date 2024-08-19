@@ -4,7 +4,7 @@ Objetivo: Ver o interpretador de Julia como uma calculadora poderosa, introduzir
 
 ## Começando com o modo interativo do Julia
 
-Quem quiser já pode instalar o ambiente de programação, usem esse [link](https://julialang.org/).
+Quem quiser já pode instalar o ambiente de programação, usem esse [link](https://julialang.org/). Há também alguns ambientes que permitem o uso da linguagem no seu navegador, sugiro a busca pelas palavras chave `Julia Language online`.
 
 Dentro do Julia (após chamar julia na linha de comando), vamos começar com contas com números inteiros:
 
