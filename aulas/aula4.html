@@ -8,7 +8,7 @@
 
 <meta name="author" content="Alfredo Goldman e Lucas de Sousa Rosa">
 
-<title>1&nbsp; Visão Geral do Curso – Nome do Livro</title>
+<title>4&nbsp; Introdução às Funções – Nome do Livro</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../aulas/aula2.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../references.html" rel="next">
+<link href="../aulas/aula3.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../aulas/aula1.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Visão Geral do Curso</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../aulas/aula4.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução às Funções</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -122,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../aulas/aula1.html" class="sidebar-item-text sidebar-link active">
+  <a href="../aulas/aula1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Visão Geral do Curso</span></span></a>
   </div>
 </li>
@@ -140,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../aulas/aula4.html" class="sidebar-item-text sidebar-link">
+  <a href="../aulas/aula4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução às Funções</span></span></a>
   </div>
 </li>
@@ -155,15 +155,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#o-uso-de-funções-é-uma-abstração-natural" id="toc-o-uso-de-funções-é-uma-abstração-natural" class="nav-link active" data-scroll-target="#o-uso-de-funções-é-uma-abstração-natural"><span class="header-section-number">4.1</span> O uso de funções é uma abstração natural</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Visão Geral do Curso</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introdução às Funções</span></h1>
 </div>
 
 
@@ -180,8 +186,78 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Objetivo: Começar a entender como funcionam as funções em uma linguagem de programação</p>
+<section id="o-uso-de-funções-é-uma-abstração-natural" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="o-uso-de-funções-é-uma-abstração-natural"><span class="header-section-number">4.1</span> O uso de funções é uma abstração natural</h2>
+<p>Na aula passada já vimos umas funções e isso foi bem natural, foram elas:</p>
+<ul>
+<li><p>typeof() - Dado um parâmetro devolve o seu tipo. Variáveis estão associadas a tipos;</p></li>
+<li><p>div() - Dados dois parâmetros devolve a divisão inteira do primeiro pelo segundo;</p></li>
+<li><p>print() e println() - Dados diversos parâmetros os imprime, sem devolver nada.</p></li>
+</ul>
+<p>Inclusive, aqui vale a pena ver que podemos pedir ajuda ao Julia para saber o que fazem as funções. Para isso, se usa o ? antes da função:</p>
+<pre><code>?typeof()
+?div()
+?print()</code></pre>
+<p>Ao fazer isso, inclusive descobrimos que o div() pode ser usado também como .</p>
+<p>Uma outra função bem útil é a que permite transformar um tipo de valor em outro.</p>
+<pre><code>parse(Float64, "32")</code></pre>
+<p>Para conversão de valores em ponto flutuante para inteiros, temos a função trunc.</p>
+<pre><code>trunc(Int64, 2.25)</code></pre>
+<p>De forma inversa temos o float.</p>
+<pre><code>float(2)</code></pre>
+<p>Finalmente, podemos transformar um valor em uma string, como em:</p>
+<pre><code>string(3)</code></pre>
+<p>ou</p>
+<pre><code>string(3.57)</code></pre>
+<p>Também tem muitas funções matemáticas prontas como - sin(x) - calcula o seno de x em radianos - cos(x) - calcula o cosseno de x em radianos - tan(x) - calcula a tangente de x em radianos - deg2rad(x) - converte x de graus em radianos - rad2deg(x) - converte x de radianos em graus - log(x) - calcula o logarítmo natural de x - log(b, x) - calcula o logarítmo de x na base b - log2(x) - calcula o logarítmo de x na base 2 - log10(x) - calcula o logarítmo de x na base 10 - exp(x) - calcula o expoente da base natural de x - abs(x) - calcula o módulo de x - sqrt(x) - calcula a raiz quadrada de x - cbrt(x) - raiz cúbica de x - factorial(x) - calcula o fatorial de x</p>
+<p>A melhor forma de se acostumar a usar as funções é fazendo contas e verificando os resultados. Uma dica importante é que para funções mais complexas, pode ser que já existam funções prontas em Julia. Para isso uma busca com as palavras chave. Um exemplo a seguir para procurar a função para o cálculo de seno hiperbólico: “julia lang hiperbolic sin”. A busca pelo termo em inglês é uma boa dica para buscas em geral.</p>
+<p>Em julia também é possível criar funções conforme as suas necessidades, como abaixo:</p>
+<pre><code>function mensagemDeBomDia()
+   println("Tenha um bom dia!")
+end</code></pre>
+<p>Para usar uma função, basta chamá-la:</p>
+<pre><code>MensagemDeBomDia()</code></pre>
+<p>Funções, podem receber um ou mais parâmetros:</p>
+<pre><code>function imprime(a)
+   println(" Vou imprimir ", a)
+end
+imprime(42)</code></pre>
+<p>Também é possível que uma função chame outra função como em:</p>
+<pre><code>function imprimeduasvezes(a)
+   imprime(a)
+   imprime(a)
+end
+imprimeduasvezes(13)</code></pre>
+<p>Mais ainda, também é possível diferenciar funções por meio da quantidade de parâmetros.</p>
+<pre><code>function recebe(a)
+  println("Recebi um parametro: ", a)
+end
+function recebe(a, b)
+  println("Recebi dois parametros: ", a, " ", b)
+end</code></pre>
+<p>Conforme a chamada, a função chamada será diferente:</p>
+<pre><code>recebe(1)
+recebe(1, 2)</code></pre>
+<p>Também dá para chamar funções com variáveis e com operações, como em:</p>
+<pre><code>a = 10
+recebe(a)
+recebe(a, a + 1)</code></pre>
+<p>As funções que vimos até agora imprimem mensagens, mas não devolvem nada. O typeof() delas é nothing, ou seja, algo que não pode ser atribuído.</p>
+<p>Mas, também é possível fazer funções que devolvem valores, como:</p>
+<pre><code>function soma1(a)
+  return a + 1
+end</code></pre>
+<p>Nesse caso, se for passado um parâmetro numérico, a função devolverá o valor incrementado (adicionado de 1).</p>
+<p>Claro que isso pode ser usado com fórmulas mais complicadas como:</p>
+<pre><code>function hipotenusa(a, b)
+  hip = a * a + b * b
+  return hip
+end</code></pre>
+<p>Exercício: Faça uma função para encontrar o de uma equação de segundo grau</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -606,13 +682,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Boas Vindas">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Boas Vindas</span>
+      <a href="../aulas/aula3.html" class="pagination-link" aria-label="Usando o Interpretador (REPL) como Calculadora">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Usando o Interpretador (REPL) como Calculadora</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../aulas/aula2.html" class="pagination-link" aria-label="Visão Geral da Evolução de Hardware e Linguagens">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visão Geral da Evolução de Hardware e Linguagens</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../references.html" class="pagination-link" aria-label="Referências">
+        <span class="nav-page-text">Referências</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
