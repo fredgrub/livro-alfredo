@@ -1,3 +1,6 @@
+---
+engine: julia
+---
 # Usando o Interpretador (REPL) como Calculadora
 
 Objetivo: Ver o interpretador de Julia como uma calculadora poderosa, introduzir a noção de variáveis.

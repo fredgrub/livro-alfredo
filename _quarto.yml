@@ -23,19 +23,20 @@ book:
     - aulas/aula1.qmd
     - aulas/aula2.qmd
     - aulas/aula3.qmd
+    - aulas/aula4.qmd
     - references.qmd
 
 bibliography: references.bib
+
+execute:
+  cache: true
+  daemon: true
+  freeze: auto
 
 format:
   html:
     theme: cosmo
     author-meta: "Alfredo Goldman e Lucas de Sousa Rosa"
-    code-fold: false
-    code-line-numbers: false
-  pdf:
-    documentclass: scrreprt
-jupyter: julia-1.10
 ipynb-shell-interactivity: all
 
 
