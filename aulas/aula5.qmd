@@ -162,12 +162,12 @@ Agora podemos, ir ao tópico principal da aula.
 
 Observe a seguinte função imprime().
 
-
+```{julia}
 function imprime()
     println("Mensagem positiva")
     imprime()
 end
-
+```
 
 Ao ser chamada, o que acontece? O computador fará chamadas seguidas a função, imprimindo
 a mensagem, até o momento que ocorra uma limitação de memória. Logo, fazer chamadas onde

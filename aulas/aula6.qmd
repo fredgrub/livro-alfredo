@@ -101,7 +101,7 @@ function fibo(n)
 end
 
 fibo(10)
-´´´
+```
 
 É interessante notar que apesar de ser um dos exemplos clássicos de uso de
 recursão, o algoritmo acima é extremamente ineficiente. A razão é simples, cada
@@ -225,4 +225,4 @@ end
 
 testeMDC()
 println("O mdc entre 1227 e 321 é ", mdc(1227, 321))
-``` {julia}
+```
