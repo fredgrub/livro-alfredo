@@ -10,7 +10,7 @@ de forma natural. O tipo booleando, ou seja uma variável que pode valer true
 
 Observem os seguintes exemplos:
 
-```
+``` {julia}
 2 + 2 == 4
 3 != 8
 23 < 24
@@ -25,7 +25,7 @@ comparar valores.
 
 Sobre as variáveis booleanas vale também observar o seu tipo.
 
-```
+``` {julia}
 typeof(2 ==3)
 ```
 
@@ -33,7 +33,7 @@ typeof(2 ==3)
 Finalmente, também podemos negar variáveis booleanas para inverter o seu valor:
 
 
-```
+``` {julia}
 !true
 !false
 ```
@@ -47,7 +47,7 @@ momento não tínhamos comentado isso explicitamente, mas a ordem de execução 
 a ordem em que elas estão. Vejamos o exemplo abaixo:
 
 
-```
+``` {julia}
 println("Oi")
 println("um")
 println("dois")
@@ -59,7 +59,7 @@ A ordem de impressão será Oi, um e dois.
 Da mesma forma não temos problema ao executar o código abaixo.
 
 
-```
+``` {julia}
 denominador = 0
 denominador += 2
 30 / denominador
@@ -74,7 +74,7 @@ o seguinte exemplo:
 
 
 
-```
+``` {julia}
 pandemia = true
 println("Vou sair de casa?")
 if pandemia == true
@@ -90,7 +90,7 @@ end
  Um outro exemplo:
 
 
-```
+``` {julia}
 denominador = 1
 if denominador != 0
    println("sei fazer a divisão se não for por zero")
@@ -105,7 +105,7 @@ caso do if, é muito comum termos duas ou mais situações. Nesse sentido em Jul
 também ter alternativas como abaixo:
 
 
-```
+``` {julia}
  pandemia = true
  println("Vou sair de casa?")
  if pandemia == true
@@ -120,7 +120,7 @@ também ter alternativas como abaixo:
 No caso de termos mais de uma altenativa, não basta termos só uma condição,
 nesse caso temos que usar elseif.
 
- ```
+ ``` {julia}
 pandemia = true
 tenhoqueestudar = true
 println("Vou sair de casa?")

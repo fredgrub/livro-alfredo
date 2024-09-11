@@ -1,0 +1,170 @@
+---
+engine: julia
+---
+
+
+Vamos começar o capítulo vendo uma forma mais simples de se rodar testes. Nos testes
+que vimos até agora sempre havia o teste de uma condição booleana associado a uma
+mensagem de erro quando não funcionasse. Mas, observando que a mensagem de erro geralmente
+está ligada à condição, por vezes a condição pode ser auto-explicativa.
+
+Logo, uma forma elegante de expressar as condições pode ser útil na escrita dos testes.
+Para isso, vamos usar o módulo de testes. Em linguagens modernas, várias das situações
+repetitivas que enfrentamos podem ser evitadas usando alguma técnica mais moderna.
+
+
+´´´
+using Test
+@testset "Modelo de testes" begin
+    @test 2 == 1 + 1
+    @test true
+    @test !false
+end
+´´´
+
+No trecho acima primeiro indicamos que queremos fazer testes. Em
+seguida usamos o @test que espera uma condição ou valor
+booleano. Finalmente todos os testes são reunidos em um @testset.
+
+Claro que o teste dá infomações relevantes quando falha:
+
+
+´´´
+using Test
+@test 2 + 2 != 4
+´´´
+
+Agora sim, vamos pensar em problemas algoritmicos novos. Que tal fazer a soma
+dos dígitos de um número inteiro. Ou seja, pensar em um número dígito à dígito.
+Vamos aos testes primeiro:
+
+´´´
+using Test
+@testset "Teste da Soma de Dígitos" begin
+    @test somaDig(0) == 0
+    @test somaDig(1) == 1
+    @test somaDig(100) == 1
+    @test somaDig(123) == 6
+    @test somaDig(321) == 6
+    @test somaDig(99) == 18
+end
+´´´
+
+
+
+
+Vamos agora tentar pensar em como "descascar" um número, dado o número 123, uma
+forma seria pegar o resto por 10 (ou seja 3) e depois dividir por 10 (ou seja 12),
+e assim por diante. Ou seja.
+
+´´´
+function somaDig(n)
+    if n <=0 return 0
+    else
+        return n % 10 + somaDig(n ÷ 10)
+    end
+end
+
+println(somaDig(1234))
+´´´
+
+Vamos agora a um outro problema clássico, a verificação se um número é ou não é primo.
+Na prática para fazer isso, temos a definição, um número $n$ é primo apenas se for
+divisível apenas por 1 e por ele mesmo. Ou seja, nenhum número entre 2 e $n - 1$ pode
+ser divisor de um número primo.
+
+A forma de se fazer isso é relativamente simples. Vamos pensar em uma função que tenta
+dividir um número recursivamente, se conseguir devolve falso, se não conseguir devolve
+verdadeiro.
+
+Vamos aos código:
+
+´´´
+function divide(n, i)
+    if n % i == 0
+        return false
+    elseif i == n - 1
+        return true
+    else
+        return divide(n, i + 1)
+    end
+end
+´´´
+
+
+Que pode ser chamada por:
+
+´´´
+function éPrimo(n)
+    return divide(n, 2)
+end
+´´´
+
+
+Mais um exemplo, o método de Newton para o cálculo de raiz quadrada. Para achar
+a raiz de $x$, a partir de um chute inicial (por exemplos $y= x /2$), chegamos a um
+novo chute que é a média de $y$ e $x/y$.
+
+Mas, sim, vamos começar com os testes:
+
+
+´´´
+using Test
+function quaseIgual(a, b)
+    if abs(a - b) <= 1e-20
+        return true
+    else
+        return false
+    end
+end
+
+
+@testset "Teste da raiz pelo método de Newton" begin
+    @test quaseIgual(3.0, raiz(3.0 * 3.0))
+    @test quaseIgual(33.7, raiz(33.7 * 33.7))
+    @test quaseIgual(223.7, raiz(223.7 * 223.7))
+    @test quaseIgual(0.7, raiz(0.7 * 0.7))
+    @test quaseIgual(1.0, raiz(1.0 * 1.0))
+end
+´´´
+
+Note que como estamos comparando números em ponto flutuante, não usamos a
+comparação exata.
+
+A solução final é:
+
+
+´´´
+function newton(c, n)
+    q = n / c
+    if quaseIgual(q, c)
+        return q
+    else
+        return newton( (c + q) / 2.0, n)
+    end
+end
+
+
+function raiz(n)
+    a =  newton(n / 2.0, n)
+    println("a raiz de ", n, " é ", a)
+    return a
+end
+´´´
+
+
+*** Funções caóticas
+
+Vamos brincar um pouco agora com funções caóticas :), isso é, funções, que
+conforme o comportamento de uma constante $k$, apresentam resultados que podem
+convergir ou não. Isso é, a cada passo, quero saber o valor do próximo ponto
+aplicando a função novamente, isso é:
+\[x_1 = f(x_0), x_2 = f(x_1), \ldots, x_n  = f(x_{n - 1})\]
+
+A função $f$ é extremamente simples: $x_{i + 1}=x_i * (1 -  x_i) * k$.
+
+Implemente a função e imprima os 30 primeiros resultados.
+Comece com um valor de $x$ entre 0 e 1, como 0.2. Use constantes $k = 2.1, 2.5, 2.8$ e $3.1$
+o que ocorre com $k = 3.7$?
+
+Entregue o código e um pequeno relatório sobre o que acontece.

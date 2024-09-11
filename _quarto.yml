@@ -24,7 +24,10 @@ book:
     - aulas/aula2.qmd
     - aulas/aula3.qmd
     - aulas/aula4.qmd
-    - references.qmd
+    - aulas/aula5.qmd
+    - aulas/aula6.qmd
+    - aulas/aula7.qmd
+#    - references.qmd
 
 bibliography: references.bib
 
@@ -37,6 +40,8 @@ format:
   html:
     theme: cosmo
     author-meta: "Alfredo Goldman e Lucas de Sousa Rosa"
+  pdf:
+    documentclass: scrreprt
 ipynb-shell-interactivity: all
 
 
