@@ -1,7 +1,7 @@
 ---
 engine: julia
 ---
-
+# Testes automatizados e um pouco mais de código
 
 Vamos começar o capítulo vendo uma forma mais simples de se rodar testes. Nos testes
 que vimos até agora sempre havia o teste de uma condição booleana associado a uma
@@ -23,8 +23,8 @@ end
 ```
 
 No trecho acima primeiro indicamos que queremos fazer testes. Em
-seguida usamos o @test que espera uma condição ou valor
-booleano. Finalmente todos os testes são reunidos em um @testset.
+seguida usamos o *test* que espera uma condição ou valor
+booleano. Finalmente todos os testes são reunidos em um *testset*.
 
 Claro que o teste dá infomações relevantes quando falha:
 
@@ -33,6 +33,12 @@ Claro que o teste dá infomações relevantes quando falha:
 #| eval: false
 using Test
 @test 2 + 2 != 4
+```
+
+```
+Test Failed at REPL[2]:1
+  Expression: 2 + 2 != 4
+   Evaluated: 4 != 4
 ```
 
 Agora sim, vamos pensar em problemas algoritmicos novos. Que tal fazer a soma
@@ -107,7 +113,9 @@ Mais um exemplo, o método de Newton para o cálculo de raiz quadrada. Para acha
 a raiz de $x$, a partir de um chute inicial (por exemplos $y= x /2$), chegamos a um
 novo chute que é a média de $y$ e $x/y$.
 
-Mas, sim, vamos começar com os testes:
+Mas, sim, vamos começar com os testes. Como estamos usando números do tipo *double* é bom
+sempre ter uma tolerância, por isso vamos usar uma comparação aproximada. Também poderiamos ter
+usado a função *isapprox* da linguagem Julia.
 
 
 ```{julia}
