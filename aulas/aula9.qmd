@@ -1,0 +1,150 @@
+---
+engine: julia
+---
+
+# Aula de exercícios
+
+
+
+## Revisitando o cálculo do fatorial, recursivo e interativo
+
+Agora que aprendemos a fazer também repetições com o comando while, sempre é 
+bom pensar em qual o comando mais adequado. Vejamos o exemplo abaixo com duas
+versões da função para o cálculo do Fatorial.
+
+
+``` {julia}
+function fatorial_recursivo(n::Int64)
+    if n == 0 || n == 1
+        return 1
+    else
+        return n * fatorial_recursivo(n - 1)
+    end
+end
+
+function fatorial_iterativo(n::Int64)
+    resultado = 1
+    while n > 1
+        resultado *= n
+        n -= 1
+    end
+    return resultado
+end
+```
+
+No código acima temos uma novidade, nos parâmetros da função, o tipo está sendo 
+declarado expicitamente. No caso, estamos dizendo que o valor n que a função vai 
+receber é de um tipo específico. Ou seja um Inteiro de 64 bits.
+
+O estilo de código está um pouco diferente do que antes, pois foi escrito por
+outra pessoa. A monitora. Vemos que ela tem o hábito de usar nomes de variáveis maiores 
+além do que usar contrações como += e *=.
+
+## Aproximação da raiz quadrada
+
+Para o próximo exemplo, vamos ver o método de Newthon-Raphson para o cálculo
+da raiz quadrada. É um método recursivo no qual o próximo valor é baseado no 
+valor anterior. Quanto mais chamadas forem feitas, mais próximo do valor final
+vai se chegar.
+
+Mais informações sobre o método podem ser encontradas em https://pt.wikipedia.org/wiki/M%C3%A9todo_de_Newton%E2%80%93Raphson
+Mas para o momento temos que pensar na seguinte implementação. Para se calcular 
+a raiz, podemos usar a seguinte fórmula, a partir de um palpite inicial r, para
+o valor da raiz de x.
+
+$$ r_{n+1} = 0.5 * (r + x / r)$$
+
+Como o código abaixo é mais complicado, foram usados comentários.
+
+
+``` {julia}
+function aproxima_raiz(x::Float64, epsilon::Float64)::Float64
+    if x < 0
+        return nothing
+    end
+
+    # Chute inicial 
+    aproximacao = x/2
+    melhor_aproximicao = aproximacao
+
+    while true
+        # Fórmula para aproximação de raiz quadrada utilizando o método de Newthon-Raphson
+        melhor_aproximicao = 0.5 * (aproximacao + x/aproximacao)
+
+        # Se a distância absoluta entre os dois pontos é menor do que epsilon, então podemos parar o método
+        if abs(aproximacao - melhor_aproximicao) <= epsilon
+            break
+        end
+
+        # Se a aproximação ainda não for boa o sufuciente, então atualizamos a aproximação para a próxima iteração
+        aproximacao = melhor_aproximicao
+    end
+
+    return melhor_aproximicao
+
+end
+```
+
+Notem que foi introduzido um comando novo, o break, esse comando apenas interrompe a 
+execução do while. Ou seja, força a saída do laço.
+
+## Verificar se um número é primo
+
+No próximo exemplo, vamos verificar se um número é primo, ou seja, se os seus únicos 
+divisores são 1 e o próprio. A forma mais simples de se fazer isso é procurando 
+dividir o número por outros. Se algum dividir, o número não é primo.
+
+``` {julia}
+function verifica_primo(num :: Int64)
+    if num <= 1
+        return false
+    end
+    i=2
+    # pode ser melhorado com i<=num/2
+    # ou também com i<= sqrt(num): baseado no fato que um número composto deve ter um fator menor ou igual a raiz desse número
+    while i<num
+        if num % i == 0
+            return false
+        end
+        i+=1
+    end
+    return true
+end
+
+```
+
+Assim, como o comando break é usado para interromper a execução de um laço, o 
+comando return, pode ser usado para terminar a execução de uma função, a qualquer
+momento.
+
+## Verificar se um número é palíndromo
+
+Um número palíndromo é um número que é simétrico. Ou seja, a leitura dos dígitos 
+da esquerda para a direita é igual a leitura dos dígitos na ordem inversa. Por
+exemplo, o número 121 é palíndromo, assim como o 11 e o 25677652. Os números 
+de um dígito também são.
+
+``` {julia}
+function e_palindromo(n::Int64)
+    # Guarda os dígitos de n que ainda devem ser invertidos
+    aux = n
+    # Guarda a inversão do número n 
+    n_inv = 0
+
+    # Continuamos o while enquanto ainda há números a serem invertidos
+    while aux > 0 
+        # Coloca o último dígito de aux na variável que guarda a inversão
+        resto = aux % 10
+        n_inv= n_inv * 10 + resto
+
+        # Retira o último dígito de aux
+        aux = div(aux,10)
+    end
+
+    if n == n_inv
+        println("O número $n é palíndromo")
+    else
+        println("O número $n não é palíndromo")
+    end 
+end
+```

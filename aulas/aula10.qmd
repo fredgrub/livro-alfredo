@@ -1,0 +1,167 @@
+---
+engine: julia
+---
+
+# Revisitando a aula passada
+
+Além de discutirmos o que vimos na aula passada. Nessa aula,
+vimos uma nova solução para o problema de verificar de um número é
+palíndromo.
+
+Para isso usamos uma técnica um pouco diferente, ou seja, ao invés
+de inverter o número e compará-lo com o original. Verificamos se
+os seus extremos são iguais.
+
+Observe o número 234432, o primeiro passo seria verificar que nos extremos,
+mais significativo e menos significativo, temos os números 2. Em seguida,
+podemos continuar com a verificação para o número 3443. Se em algum momento
+a verificação falhar o número não é palíndromo.
+
+Seguem os testes e o código abaixo.
+
+``` {julia}
+using Test
+
+function testaPal()
+  @test testaPal(1)
+  @test testaPal(131)
+  @test testaPal(22)
+  @test testaPal(53877835)
+  @test !testaPal(123)
+  @test !testaPal(23452)
+  println("Final dos testes")
+end
+
+function testaPal(n::Int64)
+# o primeiro passo é encontrar um número com o mesmo número de dígitos de n
+  pot10 = 1
+  while pot10 < n
+    pot10 = pot10 * 10
+  end
+  pot10 = div(pot10, 10)
+
+
+  while n > 9
+    d1 = n % 10
+    d2 = div(n, pot10)
+    if d1 != d2
+      return false
+    end
+    n = div(n % pot10, 10)
+    pot10 = div(pot10, 100)
+  end
+  return true
+end 
+``` 
+
+## Aleatoreidade
+
+Em julia temos a função rand() que devolve um número em ponto flutuante entre 0 e 1.
+Conforme os parâmetros, podemos ter outros tipos de número como:
+
+``` {julia}
+rand(Int)  # devolve um inteiro
+rand(1:10) # devolve um número entre 1 e 10
+rand(Bool) # devolve verdadeiro ou falso
+```
+
+Mas, antes de ver um código com rand(). Vamos pensar em um problema da vida real. Imagine 
+que temos que fazer um sorteio justo, e o único instrumento que possuímos para o sorteio
+é uma moeda viciada. Que tem como resultado muito mais faces do que coroas. Dá para usar
+essa moeda em um sorteio justo?
+
+A ideia para resolver o problema é olhar para pares de sorteios. Ou seja, vamos ignorar
+sorteios onde tenhamos duas faces ou duas coroas. Nos outros, teremos uma coroa e
+uma face ou vice versa. As chances das duas serão de 50%. Logo podemos assim, corrigir a 
+moeda viciada.
+
+Para simplificar o exercício, a moeda pode devolver 0, ou 1, correspondentes
+a cara ou a coroa. Observe a seguinte função que simula uma moeda viciada.
+
+``` {julia}
+function sorteio()
+  if rand() > 0.90
+    return 1
+  else 
+    return 0
+  end
+end
+```
+
+Pode se observar que a função devolve 0 na maior parte das vezes. Podemos
+inclusive ver isso, fazendo mil sorteios:
+
+``` {julia}
+function verificaSorteio()
+   cara = 0
+   coroa = 0
+   i = 0
+   while i < 1000
+     if sorteio() == 0
+        cara = cara + 1
+     else
+        coroa = coroa + 1
+     end
+     i = i + 1
+   end
+   println("O número de caras foi: ", cara," e de coroas foi :", coroa)
+end
+```
+
+Mas, podemos corrigir o sorteio da seguinte forma:
+
+``` {julia}
+function sorteioBom()
+   sorteio1 = sorteio()
+   sorteio2 = sorteio()
+   while sorteio1 == sorteio2 # se forem iguais, tente novamente
+     sorteio1 = sorteio()
+     sorteio2 = sorteio()
+   end
+   return sorteio1   # ao termos um diferente, podemos devolver o primeiro sorteio
+end
+```
+
+Podemos usar o verificaSorteio para ver a diferença.
+
+``` {julia}
+function verificaSorteio()
+   cara = 0
+   coroa = 0
+   i = 0
+   while i < 1000
+     if sorteioBom() == 0
+        cara = cara + 1
+     else
+        coroa = coroa + 1
+     end
+     i = i + 1
+   end
+   println("O número de caras foi: ", cara," e de coroas foi :", coroa)
+end
+```
+
+Para terminar a aula vamos aplicar o método de Monte Carlo para o cálculo de Pi.
+Imaginem o primeiro quadrante, onde temos um semi-círculo de raio 1, dentro de um
+quadrado de lado 1. Podemos sortear valores, os que sairem dentro do círculo podem
+contar para a área desse. Mais informações podem ser vistas aqui (https://pt.wikipedia.org/wiki/M%C3%A9todo_de_Monte_Carlo)
+
+``` {julia}
+function calculaPi(total)
+   noAlvo = 0
+   i = 0
+   while i < total
+     x = rand() / 2.0 # gera um número entre 0 e 0.5
+     y = rand() / 2.0
+     if sqrt(x * x + y * y) <= 0.5
+       noAlvo = noAlvo + 1
+     end
+     i = i + 1
+   end
+   return 4 * (noAlvo / total)  # precisamos multiplicar para ter a área de 4 quadrantes
+end 
+
+println(calculaPi(100))
+println(calculaPi(1000000))
+println(calculaPi(1000000000))
+```

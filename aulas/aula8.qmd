@@ -1,0 +1,110 @@
+---
+engine: julia
+---
+
+# Uma outra forma de se fazer laços
+
+Até o momento vimos que o computador é muito bom para fazer contas 
+e repetições. Fizemos isso até agora com funções recursivas. Mas, existe
+um outro comando para isso, o while. A motivação é que enquanto alguma
+condição for válida, o computador continua repetindo os comandos.
+
+O formato básico é o seguinte:
+
+``` 
+while condição
+  # execute obloco
+end  
+```
+
+Enquanto a condição continuar verdadeira, o computador vai seguir repetindo o bloco
+que pode ser formado por várias intruções. Logo, para que a repetição, ou laço, não 
+seja repetido indefinidamente, é essencial que algo ligado a condição seja atualizado 
+no corpo do while.
+
+Vejamos o exemplo simples da contagem regressiva:
+
+``` {julia}
+n = 5
+while n > 0
+  println(n)
+  n = n - 1
+end
+println("Acabou")  
+``` 
+
+Mas, vamos ver abaixo um caso onde o uso de while deixa o código mais Claro 
+que com a recursão (onde é ruim fazer uma com vários parãmetros). Veja a 
+resolução da série de Taylor abaixo:
+
+``` {julia}
+ function sinTaylor2(x)
+   i = 1
+   termo = x
+   soma = 0.0
+   while i <= 15
+     soma = soma + termo
+     termo = -1 * termo * x * x / ((2 * i) * (2 * i + 1))
+     i = i + 1
+   end
+   return soma
+end
+
+``` 
+
+Nela são calculados os 15 primeiros termos. 
+
+Observem a versão recursiva:
+
+``` {julia}
+function sinTaylor(x)
+    return sinTaylorRec(1, 15, x, 1, x)
+end
+
+function sinTaylorRec(i, n, x, sinal, termo)
+    if n == i
+      return 0.0
+    else
+      return sinal * termo +
+         sinTaylorRec(i + 1, n, x, -1 * sinal, termo * x * x/ (2*i * (2*i+1)))
+    end
+end
+``` 
+
+
+Podemos também fazer operações com os dígitos de um número inteiro, para isso operações 
+como o resto da divisão por 10 e a divisão inteira por 10 são bastante úteis. Abaixo 
+temos as duas versões que fazem a soma dos dígitos de um número inteiro.
+
+
+``` {julia}
+using Test
+function testaSD()
+  @test sd(123) == 6
+  @test sd(321) == 6
+  @test sd(0) == 0
+  @test sd(1001) == 2
+  @test sd(3279) == 21
+  println("Fim dos testes")
+end
+
+function sd(x)
+  if x == 0
+     return 0
+  else
+     d = x % 10
+     return d + sd(div(x, 10))
+  end
+end
+
+function sd1(x)
+  soma = 0
+  while x != 0
+   d = x % 10
+   soma = soma + d
+   x = div(x, 10)
+  end
+  return soma
+end
+testaSD()
+``` 
