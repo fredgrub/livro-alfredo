@@ -1,48 +1,35 @@
 project:
   type: book
+  output-dir: .
 
 lang: pt
 
 book:
-  title: "Nome do Livro"
-  subtitle: "Subtítulo"
-  reader-mode: true
-
-  page-footer:
-    left: |
-      Nota de rodapé a esquerda.
-    right: |
-      Este livro foi feito com <a href="https://quarto.org/">Quarto</a>.
-
+  title: "Introdução à Linguagem Julia"
   author:
     - "Alfredo Goldman"
     - "Lucas de Sousa Rosa"
   date: "last-modified"
   chapters:
     - index.qmd
-    - aulas/aula1.qmd
-    - aulas/aula2.qmd
-    - aulas/aula3.qmd
-    - aulas/aula4.qmd
-    - aulas/aula5.qmd
-    - aulas/aula6.qmd
-    - aulas/aula7.qmd
-#    - references.qmd
-
-bibliography: references.bib
+    - aulas/01.qmd
+    - aulas/02.qmd
+    - aulas/03.qmd
+    - aulas/04.qmd
+    - aulas/05.qmd
+    - aulas/06.qmd
+    - aulas/07.qmd
+    - aulas/08.qmd
+    - aulas/09.qmd
+    - aulas/10.qmd
+    - aulas/11.qmd
 
 execute:
   cache: true
-  daemon: true
   freeze: auto
 
 format:
-  html:
-    theme: cosmo
-    author-meta: "Alfredo Goldman e Lucas de Sousa Rosa"
   pdf:
-    documentclass: scrreprt
-ipynb-shell-interactivity: all
-
-
-
+    toc: true
+    number-sections: true
+    colorlinks: true

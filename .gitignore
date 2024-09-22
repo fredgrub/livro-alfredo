@@ -1,3 +1,5 @@
-/_book/
-/.quarto/
+venv/
+.quarto/
 *~
+
+/.quarto/
