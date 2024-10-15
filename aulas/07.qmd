@@ -172,7 +172,9 @@ convergir ou não. Isso é, a cada passo, quero saber o valor do próximo ponto
 aplicando a função novamente, isso é:
 $$x_1 = f(x_0), x_2 = f(x_1), \ldots, x_n  = f(x_{n - 1})$$
 
-A função $f$ é extremamente simples: $x_{i + 1}=x_i * (1 -  x_i) * k$.
+As funções caóticas desempenham um papel significativo em diversas áreas da matemática e da física, com aplicações que vão desde a modelagem de crescimento populacional até a previsão de padrões climáticos. Elas também são fundamentais na análise de circuitos elétricos não lineares, onde pequenas variações nas condições iniciais podem levar a resultados drasticamente diferentes.
+
+Para o nosso teste, a função $f$ é extremamente simples: $x_{i + 1}=x_i * (1 -  x_i) * k$.
 
 Implemente a função e imprima os 30 primeiros resultados.
 Comece com um valor de $x$ entre 0 e 1, como 0.2. Use constantes $k = 2.1, 2.5, 2.8$ e $3.1$

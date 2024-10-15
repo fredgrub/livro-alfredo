@@ -141,6 +141,30 @@ function verificaSorteio()
 end
 ```
 
+Podemos ainda aproximar o número de Euler (𝑒), constante matemática que é a base dos logaritmos naturais, usando uma simulação probabilística.
+A ideia por trás desse código é que o número médio de tentativas necessárias para que a soma de números aleatórios entre 0 e 1 ultrapasse 1 se aproxima do valor de 𝑒. Isso é baseado em uma relação matemática que conecta essa situação ao número 𝑒.
+
+```{julia}
+function calculaEuler(total)
+    soma_tentativas = 0
+    for i in 1:total
+        soma = 0.0
+        tentativas = 0      
+        while soma <= 1   # Continue gerando números até a soma ultrapassar 1
+            soma += rand()     # Gera número aleatório entre 0 e 1
+            tentativas += 1
+        end        
+        soma_tentativas += tentativas     # Somar o número de tentativas necessárias
+    end 
+    return soma_tentativas / total     # A média do número de tentativas será uma estimativa de e
+end
+
+println("Estimativa de e (1000 iterações): ", calculaEuler(1000))
+println("Estimativa de e (100000 iterações): ", calculaEuler(100000))
+println("Estimativa de e (100000000 iterações): ", calculaEuler(100000000))
+```
+
+
 Para terminar a aula vamos aplicar o método de Monte Carlo para o cálculo de Pi.
 Imaginem o primeiro quadrante, onde temos um semi-círculo de raio 1, dentro de um
 quadrado de lado 1. Podemos sortear valores, os que sairem dentro do círculo podem

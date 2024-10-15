@@ -24,7 +24,13 @@ Sim, como era de se esperar, podemos em Julia usar os operandos: `+`, `-` e `*`,
 
 
 ```{julia}
-84 / 2
+a = 84 
+b = 2
+
+# As variáveis a e b são do tipo Int64
+
+resultado = a / b
+println(resultado)
 ```
 
 Notem que nesse caso, houve uma mudança de tipos, pois 84 e 2 são inteiros e o resultado é um número em ponto flutuante (float), podemos ver isso, pois ao invés de 42, tivemos como resultado 42.0.
@@ -118,6 +124,27 @@ Além das operações básicas também temos as operações matemáticas (funç�
 @doc sin
 ```
 
+A saída desse comando indica a operação que a função realiza e ainda apresenta alguns exemplos: 
+
+```
+  sin(x)
+
+  Compute sine of x, where x is in radians.
+
+  See also sind, sinpi, sincos, cis, asin.
+
+  Examples
+  ≡≡≡≡≡≡≡≡
+
+  julia> round.(sin.(range(0, 2pi, length=9)'), digits=3)
+  1×9 Matrix{Float64}:
+   0.0  0.707  1.0  0.707  0.0  -0.707  -1.0  -0.707  -0.0
+```
+
+
+Ambos os comandos `? sin` `@doc sin` possuem a mesma saída.
+
+
 Notem que nem tudo que foi apresentado faz sentido no momento, mas já dá para entender o uso de uma função como sin. Vejamos agora a raiz quadrada:
 
 ```{julia}
@@ -142,11 +169,34 @@ Mas, observamos também na documentação a função `big()`, que tem a seguinte
 @doc BigInt
 ```
 
+A função `big()` em Julia é usada para criar números inteiros grandes, representados pelo tipo BigInt. Essa função é especialmente útil quando você precisa lidar com números muito grandes que excedem o limite dos tipos inteiros padrão, como Int64 ou Int32.
+
 Com números BigInt, já não há problemas de estouro, como podemos ver abaixo:
 
 ```{julia}
 big(2) ^ 1002
 ```
+
+
+Podemos ainda carregar funções de outros arquivos em nosso arquivo Julia ou no próprio terminal, para isso basta utilizar o comando `include("caminho/do/arquivo.jl")`, Julia lê o arquivo especificado e executa todo o seu conteúdo no contexto atual. Isso significa que todas as funções, variáveis e definições no arquivo tornam-se disponíveis no ambiente onde `include` foi chamado.
+
+Como por exemplo no primeiro caso tenho um arquivo chamado `funcoes.jl` que possui a função soma:
+
+```{julia}
+function ola(nome)
+    println("Olá", nome)
+end
+
+```
+
+Podemos incluir essa função em um segundo arquivo utilizando o `include("funcoes.jl")`, e utilizar a função definida no arquivo `funcoes.jl`
+
+```
+    include("funcoes.jl")
+    println(ola("Alfredo"))  
+```
+
+Cuja saída deverá ser `Olá Alfredo`.
 
 ## Variáveis e seus tipos
 
@@ -158,20 +208,41 @@ a = 7
 ```
 
 
+### Tipagem dinâmica
 
 É importante notar que as variáveis em Julia podem receber novos valores e o tipo da variável depende do que foi atribuído por último.
 
 ```{julia}
 a = 3
+typeof(a)
+```
+
+```{julia}
 a = a + 1
 typeof(a)
 ```
+
+Neste próximo exemplo, a variável b é inicializada com um valor de tipo inteiro, contudo, após a operação de multiplicação, seu valor é do tipo ponto flutuante:
+
+```{julia}
+b = 3
+b = b * 0.5
+typeof(b)
+```
+
+A tipagem dinâmica apresenta diversas vantagens, entre elas a flexibilidade, pois é possível reutilizar variáveis para armazenar diferentes tipos de dados ao longo do tempo; e menos verbosidade, pois não é necessário especificar o tipo de cada variável, o que melhora a legibilidade do código.
 
 Aproveitando o momento, podemos ver que há vários tipos primitivos em Julia, sendo os principais:
 
 ```{julia}
 typeof(1)
+```
+
+```{julia}
 typeof(1.1)
+```
+
+```{julia}
 typeof("Bom dia")
 ```
 
@@ -211,7 +282,7 @@ Mas, a linguagem vai bem além com caracteres de animais e símbolos:
 🏠 = 20 # \:house: <tab>
 ```
 
-Isso não adiciona nada do lado de algoritmos, mas é possível ter variáveis bem bonitinhas. A lista de figuras pode ser encontrada [aqui](https://docs.julialang.org/en/v1/manual/unicode-input/).
+Isso não adiciona nada do lado de algoritmos, mas é possível ter variáveis bem bonitinhas. A lista de figuras pode ser encontrada [aqui](   ://docs.julialang.org/en/v1/manual/unicode-input/).
 
 ## Saída de dados
 Para fazer saídas usam-se dois comandos, `print()` e o `println()`, sendo que o primeiro não pula linha e o segundo pula.
@@ -227,7 +298,7 @@ Para evitar que se digitem muitos caracteres, por vezes podemos usar "açucares 
 ```{julia}
 x = 1
 x = x + 1
-x += 1  # forma equivalente a acima
+x += 1  # forma equivalente a acima, o mesmo vale para os operadores *, - e /
 ```
 
 Acima, vimos a forma de se inserir comentários em Julia (sim esses serão ignorados pelo computador).
@@ -235,4 +306,25 @@ Acima, vimos a forma de se inserir comentários em Julia (sim esses serão ignor
 
 Exercício:
 Faça o passo a passo para encontrar as raízes da equação de segundo grau $x^2 - 5 x + 6$, usando
-as váriaveis `a`, `b`, `c`, `\Delta`, `x1` e `x2`.
+as váriaveis `a`, `b`, `c`, `\Delta`, `x1` e `x2`. Após isso, compare com a solução a seguir:
+
+```{julia}
+
+# Definição dos coeficientes
+a = 1
+b = -5
+c = 6
+
+# Cálculo do discriminante
+delta = b^2 - 4 * a * c
+
+# Cálculo das raízes
+if delta >= 0
+    x1 = (-b + sqrt(delta)) / (2 * a)
+    x2 = (-b - sqrt(delta)) / (2 * a)
+    println("As raízes são: x1 = $x1 e x2 = $x2")
+else
+    println("A equação não possui raízes reais.")
+end
+
+```

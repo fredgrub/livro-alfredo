@@ -24,6 +24,8 @@ resposta = readline()
 println("O seu nome é: ", resposta)
 ```
 
+Caso, ao rodar o programa, você digitar `Maria`, e pressionar a tecla enter, a resposta final do seu programa será `O seu nome é: Maria`.
+
 Como o readline() lê Strings, se quisermos ler números, é
 necessário usar o comando parse. O comando parse de forma simples 
 possui dois parâmetros, o primeiro corresponde ao tipo que se quer 
@@ -286,7 +288,9 @@ end
 ``` 
 
 
-abaixo temos dois exemplos de produto escalar de dois vetores. lembrado esse é definido
+### Álgebra linear e Listas
+
+A manipulação de listas é uma parte fundamental da álgebra linear, que estuda vetores e matrizes. Funções como o produto escalar de dois vetores são exemplos clássicos. Abaixo temos dois exemplos de produto escalar de dois vetores. lembrado esse é definido
 como a soma dos produtos de elementos em posições iguais.
 
 ```{julia}
@@ -307,7 +311,7 @@ end
 Acima vimos que um caso especial do uso do for, consiste em fazer Ofor varias entre 
 1 e um tamanho (1:lenght(a))
 
-Observem a diferença na versão abaixo
+Observem a diferença na versão abaixo:
 
 
 ```{julia}

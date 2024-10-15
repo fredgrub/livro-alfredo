@@ -66,20 +66,24 @@ string(3.57)
 
 
 Também tem muitas funções matemáticas prontas como
-- sin(x) - calcula o seno de x em radianos
-- cos(x) - calcula o cosseno de x em radianos
-- tan(x) - calcula a tangente de x em radianos
-- deg2rad(x) - converte x de graus em radianos
-- rad2deg(x) - converte x de radianos em graus
-- log(x) - calcula o logarítmo natural de x
-- log(b, x) - calcula o logarítmo de x na base b
-- log2(x) - calcula o logarítmo de x na base 2
-- log10(x) - calcula o logarítmo de x na base 10
-- exp(x) - calcula o expoente da base natural de x
-- abs(x) - calcula o módulo de x
-- sqrt(x) - calcula a raiz quadrada de x
-- cbrt(x) - raiz cúbica de x
-- factorial(x) - calcula o fatorial de x
+
+| Função            | Descrição                                          |
+|:------------------|:--------------------------------------------------|
+| `sin(x)`          | Calcula o seno de \( x \) em radianos            |
+| `cos(x)`          | Calcula o cosseno de \( x \) em radianos         |
+| `tan(x)`          | Calcula a tangente de \( x \) em radianos        |
+| `deg2rad(x)`      | Converte \( x \) de graus em radianos            |
+| `rad2deg(x)`      | Converte \( x \) de radianos em graus            |
+| `log(x)`          | Calcula o logaritmo natural de \( x \)           |
+| `log(b, x)`       | Calcula o logaritmo de \( x \) na base \( b \)   |
+| `log2(x)`         | Calcula o logaritmo de \( x \) na base 2         |
+| `log10(x)`        | Calcula o logaritmo de \( x \) na base 10        |
+| `exp(x)`          | Calcula o expoente da base natural de \( x \)    |
+| `abs(x)`          | Calcula o módulo de \( x \)                       |
+| `sqrt(x)`         | Calcula a raiz quadrada de \( x \)                |
+| `cbrt(x)`         | Calcula a raiz cúbica de \( x \)                  |
+| `factorial(x)`    | Calcula o fatorial de \( x \)                     |
+
 
 A melhor forma de se acostumar a usar as funções é fazendo contas e
 verificando os resultados. Uma dica importante é que para funções mais
@@ -90,7 +94,7 @@ termo em inglês é uma boa dica para buscas em geral.
 
 Em julia também é possível criar funções conforme as suas necessidades, como abaixo:
 
-```
+```{julia}
 function mensagemDeBomDia()
    println("Tenha um bom dia!")
 end
@@ -105,7 +109,7 @@ MensagemDeBomDia()
 
 Funções, podem receber um ou mais parâmetros:
 
-```
+```{julia}
 function imprime(a)
    println(" Vou imprimir ", a)
 end
@@ -114,7 +118,7 @@ imprime(42)
 
 Também é possível que uma função chame outra função como em:
 
-```
+```{julia}
 function imprimeduasvezes(a)
    imprime(a)
    imprime(a)
@@ -126,7 +130,7 @@ imprimeduasvezes(13)
 Mais ainda, também é possível diferenciar funções por meio da quantidade
 de parâmetros.
 
-```
+```{julia}
 function recebe(a)
   println("Recebi um parametro: ", a)
 end
@@ -170,7 +174,7 @@ incrementado (adicionado de 1).
 
 Claro que isso pode ser usado com fórmulas mais complicadas como:
 
-```
+```{julia}
 function hipotenusa(a, b)
   hip = a * a + b * b
   return hip

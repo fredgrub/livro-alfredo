@@ -108,9 +108,8 @@ recursão, o algoritmo acima é extremamente ineficiente. A razão é simples, c
 vez que é feita a chamada, toda os valores de Fibonacci são recalculados para os
 valores de $n$ e $n-1$.
 
-Como Julia é uma linguagem moderna podemos usar o conceito de Memoização (evite
-de calcular o que já foi calculado. O Memoize tem que ser instalado no Julia com
-os comandos (import Pkg; Pkg.add("Memoize"))
+Como Julia é uma linguagem moderna podemos usar o conceito de Memoização, que evita calcular o que já foi calculado. O Memoize tem que ser instalado no Julia com
+os comandos `import Pkg` e  `Pkg.add("Memoize")`.
 
 
 ```{julia}

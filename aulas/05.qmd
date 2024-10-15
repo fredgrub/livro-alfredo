@@ -12,21 +12,33 @@ Observem os seguintes exemplos:
 
 ``` {julia}
 2 + 2 == 4
+```
+
+``` {julia}
 3 != 8
+```
+
+``` {julia}
 23 < 24
+```
+
+``` {julia}
 42 <= 44
+```
+
+``` {julia}
 42 < 2
 ```
 
 Vale chamar a atenção, como em linguagens de programação o = é usado para
-atribuições, para comparações se usa o $==$. Da mesma forma o != é usado como
-diferente. Esses operadores, em conjunto com o $<, <=, >$ e $>=$ nos permitem
+atribuições, para comparações se usa o `==`. Da mesma forma o != é usado como
+diferente. Esses operadores, em conjunto com o `<`, `<=`, `>` e `>=` nos permitem
 comparar valores.
 
-Sobre as variáveis booleanas vale também observar o seu tipo.
+Sobre as variáveis booleanas vale também observar o seu tipo. Uma explicação mais aprofundada sobre como essas variáveis funcionam será fornecida quando abordarmos os operadores condicionais:
 
 ``` {julia}
-typeof(2 ==3)
+typeof(2 == 3)
 ```
 
 
@@ -196,10 +208,11 @@ Ficamos com a expressão n * fatorial(n - 1).
 
  ```{julia}
 function fatorial(n)
+  # Critério de parada: quando n é igual a 0, a recursão termina
   if n == 0
     return 1
   else
-    return n * fatorial(n - 1)
+    return n * fatorial(n - 1) # Chamada recursiva
   end
 end
 fatorial(5)
@@ -242,7 +255,7 @@ soma(11)
  ```
 
 
- Essa estrutura é bastante poderosa e pode ser usada para o cálculo de produto, nesse
+Essa estrutura é bastante poderosa e pode ser usada para o cálculo de produto, nesse
 caso, a mudança é bem pequena.
 
 Da mesma forma segue um exemplo para o cálculo dos n primeiros elementos da soma
@@ -251,9 +264,12 @@ hârmonica.
 
  ```{julia}
 function somaharmonica(atual, n)
+  # Caso base: se 'atual' é maior ou igual a 'n'
   if atual >= n
+    # Retorna o recíproco de 'atual' (último termo da soma)
     return 1.0 / atual
   else
+    # Caso recursivo: soma o recíproco de 'atual' e chama a função para o próximo número
     return 1.0 / atual + somaharmonica(atual + 1, n)
   end
 end

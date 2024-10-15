@@ -14,22 +14,32 @@ versões da função para o cálculo do Fatorial.
 
 
 ``` {julia}
-function fatorial_recursivo(n::Int64)
+function fatorial_recursivo(n::Int64) # Com o ::Int64 estamos definindo que o parâmetro da função deve ser um número inteiro
+    # Caso base do fatorial: 0! e 1! são iguais a 1
     if n == 0 || n == 1
         return 1
+    # Chamada recursiva: n! = n * (n-1)!
     else
         return n * fatorial_recursivo(n - 1)
     end
 end
 
 function fatorial_iterativo(n::Int64)
+    # Inicializa o resultado como 1 (já que o fatorial de 0 é 1)
     resultado = 1
+
+    # No loop estamos fazendo a multiplicação: n * (n-1) * ... * 2
     while n > 1
+        # Multiplica o resultado pelo valor atual de n
         resultado *= n
+
+        # Decrementa n em 1 para continuar o cálculo do fatorial
         n -= 1
     end
     return resultado
 end
+
+println(fatorial_recursivo(3))
 ```
 
 No código acima temos uma novidade, nos parâmetros da função, o tipo está sendo 
@@ -47,7 +57,7 @@ da raiz quadrada. É um método recursivo no qual o próximo valor é baseado no
 valor anterior. Quanto mais chamadas forem feitas, mais próximo do valor final
 vai se chegar.
 
-Mais informações sobre o método podem ser encontradas em https://pt.wikipedia.org/wiki/M%C3%A9todo_de_Newton%E2%80%93Raphson
+Mais informações sobre o método podem ser encontradas em [aqui](https://pt.wikipedia.org/wiki/M%C3%A9todo_de_Newton%E2%80%93Raphson).
 Mas para o momento temos que pensar na seguinte implementação. Para se calcular 
 a raiz, podemos usar a seguinte fórmula, a partir de um palpite inicial r, para
 o valor da raiz de x.
@@ -126,12 +136,18 @@ de um dígito também são.
 
 ``` {julia}
 function e_palindromo(n::Int64)
-    # Guarda os dígitos de n que ainda devem ser invertidos
+    #=
+        Guarda os dígitos de n que ainda devem ser invertidos
+        A variável auxiliar é necessária para que o valor de n não seja, perdido, e possamos usar ele posteriormente.
+    =#
     aux = n
     # Guarda a inversão do número n 
     n_inv = 0
 
-    # Continuamos o while enquanto ainda há números a serem invertidos
+    #=
+        Continuamos o while enquanto ainda há números a serem invertidos,
+        ou seja, enquanto aux for maior que 0.
+    =#
     while aux > 0 
         # Coloca o último dígito de aux na variável que guarda a inversão
         resto = aux % 10
@@ -147,4 +163,8 @@ function e_palindromo(n::Int64)
         println("O número $n não é palíndromo")
     end 
 end
+
+e_palindromo(2002)
+e_palindromo(1234)
+
 ```
