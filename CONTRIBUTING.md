@@ -22,7 +22,7 @@ Na raiz do repositório, execute o REPL de Julia com o seguinte comando:
 julia --project=@.
 ```
 
-No REPL tecle `]`, digite `instantiate` e pressione `Enter` para instalar as dependências. Nesse mesmo REPL, novos pacotes podem ser adicionados com o comando `add <nome do pacote>` (lembre-se de versionar os arquivos `Project.toml` e `Manifest.toml` após a instalação de novos pacotes).
+No REPL tecle `]`, digite `instantiate` e pressione `Enter` para instalar as dependências (a versão de Julia deve ser a mesma do `Manifest.toml`). Nesse mesmo REPL, novos pacotes podem ser adicionados com o comando `add <nome do pacote>` (lembre-se de versionar os arquivos `Project.toml` e `Manifest.toml` após a instalação de novos pacotes).
 
 ## Python (Jupyter)
 
