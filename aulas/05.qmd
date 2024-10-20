@@ -247,7 +247,7 @@ function soma(n)
   if n > 0
     return n + soma(n - 1)
   else
-    return 1
+    return 0
   end
 end
 

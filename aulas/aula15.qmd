@@ -1,0 +1,134 @@
+---
+engine: julia
+---
+
+# Boas práticas
+
+Vamos começar apresentando 3 boas práticas de programação. Na verdade há uma área que 
+cuida de desenvolvimento de software, a Engenharia de Software. Vamos a elas:
+
+## Uso de contratos
+
+Sempre que possível o código deve ser modular, ou seja estar repartido em arquivos
+e ou funções. Cada tipo de função deve deixar claro quais são os seus parâmetros
+e o que ela devolve.
+Isso pode ser feito usando tipos.
+
+
+```  {julia}
+function fatorial(n::Int64)::Int64
+    if n < 2 
+        return 1
+    else  
+        return n * fatorial(n - 1)
+    end
+end
+```
+
+Com isso, fica claro o que a função recebe e devolve, e se for enviado um tipo
+diferente do esperado, temos em erro imediato.
+
+### Boa prática 1: Use tipos
+
+## Testes automatizados
+
+Para evitar que apareçam erros, ou os populates bugs, uma forma eficaz é escrever código 
+que verifica o funcionamento do código. Se isso for feito de forma automática, temos os
+testes automatizados.
+
+```  {julia}
+using Test
+function testaFat()
+  @test fatorial(3) == 6
+  @test fatorial(5) == 120
+  @test fatorial(1) == 1
+  @test fatorial(0) == 1
+  @test fatorial(4) == 24
+end
+```
+
+### Boa prática 2: Sempre que possível faça testes
+
+## Escreva código para humanos, não para computadores
+
+Apesar dos computadores serem capazes de ler código nem sempre bem 
+formatado, é bem difícil para humanos lerem código de forma não padrão.
+Por isso algumas dicas importantes são:
+
+- Use identação. Com isso, os blocos ficam bem claros e é fácil identificar
+os laços, blocos de if e corpos de função;
+
+- Escolha bem o nome das variáveis e funções, isso ajuda muito quem for ler
+o código
+
+- Sempre que você identificar uma possibilidade de melhoria no código,
+implemente. Ainda melhor se você tiver testes automatizados, para verificar que
+a melhoria não quebrou o código.
+
+### Boa prática 3: Escreva código para que outros leiam
+
+
+## Aplicando as boas práticas
+
+Vamos agora resolver o seguinte problema, aplicando as práticas acima. 
+Dada um vetor com números reais, determinar os números que estão no vetor e o 
+número de vezes que cada um deles ocorre na mesma. 
+
+Ao analizar o problema, vemos que temos como entrada um vetor de número reais,
+que pode conter repetições. Para determinar os números que estão no vetor, podemos
+usar um outro vetor de saída. Sendo que o de entrada e o de saída devem ser do 
+tipo Float64. Além disso, para o vetor que fornece a quantidade de números temos
+um vetor de inteiros. De posse disso, já temos a assinatura da função.
+
+``` {julia}
+function contHist(v::Vector{Float64}, el::Vector{Float64}, qtd::Vector{Int64})
+end 
+```
+De posse dessa assinatura, já podemos escrever os testes.
+
+
+
+``` {julia}
+function verifica(v::Vector{Float64}, elementos::Vector{Float64}, 
+     quant::Vector{Int64})
+     el = Float64[]
+     quan = Int64[]
+     contHist(v, el, quan)
+     if el == elementos && quan == quant
+        return true
+     else
+        return false
+     end
+end
+
+function testaLista()
+  @test verifica([1.3, 1.2, 0.0, 1.3], [1.3, 1.2, 0.0], [2, 1, 1])
+  @test verifica([1.0, 1.0, 1.0, 1.0], [1.0], [4])
+  @test verifica([8.3], [8.3], [1])
+  @test verifica([3.14, 2.78, 2.78], [3.14, 2.78], [1, 2])
+end
+ 
+```
+
+Finalmente, podemos escrever o código. A idea para escrever a solução é simples,
+vamos percorrer o vetor de entrada. Para cada elemento, temos duas possibilidades,
+se ele não tiver aparecido antes, temos que adicionar o número ao vetor saída e 
+marcar 1 ocorrência. Se já apareceu, basta incrementar o número de ocorrências.
+
+
+``` {julia}
+function contHist(v::Vector{Float64}, el::Vector{Float64}, qtd::Vector{Int64})
+    for a in v
+        if a in el
+            i = 1
+            while el[i] != a
+               i += 1
+            end
+            qtd[i] += 1
+        else
+            push!(el, a)
+            push!(qtd, 1)
+        end
+    end
+end
+```
