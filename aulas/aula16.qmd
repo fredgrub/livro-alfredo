@@ -1,0 +1,168 @@
+---
+engine: julia
+---
+
+# Indo além de uma dimensão (Matrizes)
+
+Até o momento trabalhamos com estruturas com mais de uma dimensão, mas sem
+olharmos muito bem o seu tipo. Nessa aula vamos procurar entender as diferenças
+entre elas e como isso pode ser usado ao nosso favor.
+
+Vamos começar com as listas:
+
+```{julia}
+v = [1, 2, 3]
+typeof(v)
+```
+
+O tipo devolvido é: Vector{Int64} (alias for Array{Int64, 1}). No caso isso significa
+que v é um vetor de inteiros, ou um array de uma dimensão. Da mesma forma 
+
+
+```{julia}
+v = zeros(Int64, 3)
+typeof(z)
+```
+
+Mas, vetores podem ser mais flexíveis, como por exemplo abaixo:
+
+```{julia}
+v = [1, 2.0, "três"]
+typeof(v)
+```
+
+Nesse caso o tipo de vetor, deixa de ser de inteiros e passa a ser "Any",
+ou seja Vector{Any} (alias for Array{Any, 1}).
+
+Mais ainda, imaginem a seguinte situação:
+
+```{julia}
+a = [1, 2, 3]
+push!(v, a)
+typeof(v)
+```
+
+Nesse caso, o vetor continua sendo do tipo Any, mas na quarta posição temos 
+um vetor com três inteiros. 
+Com isso podemos ver que as estruturas de vetores podem ser bem flexíveis.
+Mas, apesar disso, quando temos estruturas de tipos diferentes, com muita flexibilidade,
+geralmente há alguma penalidade de uso, geralmente no desempenho.
+
+Por outro lado, podemos ter estruturas com mais de uma dimensão, no caso
+elas são denominadas matrizes. Elas podem ser criadas com a função zeros que
+já usamos acima.
+
+```{julia}
+m = zeros(Int64, 3, 2)
+typeof(m)
+```
+
+Acima foi criada uma matriz de duas dimensões com 3 linhas e duas colunas.
+Seus elementos podem se acessados como em um vetor, mas agora com dois indíces.
+
+```{julia}
+m[1, 2]  = 10
+```
+```{julia}
+function imprime(m::Array{Int64,2})
+    println(m)
+end
+```
+
+```{julia}
+function imprime(m::Vector{Vector{Int64}})
+    println(m[1])
+    println(m[2])
+end
+```
+
+
+```{julia}
+function imprime(m::Vector{Vector{Int64}})
+    for i in m
+        println(i)
+    end
+ end
+
+```
+
+
+```{julia}
+function imprime(m::Vector{Vector{Int64}})
+    for i in m
+        for j in m[i]
+            println(j,"  ")
+        end   
+    end
+end
+```
+
+
+```{julia}
+function imprime(m::Vector{Vector{Int64}})
+    for i in m
+        print("|")
+        for j in i
+            print(j,"  ")
+        end
+        println("|")   
+    end
+end
+```
+
+```{julia}
+function imprimeMatriz(m::Matrix{int64})
+    println(m)
+end 
+```
+
+
+```{julia}
+function imprimeMatriz(m::Matrix{Int64})
+    i = 1
+    while i < size(m)[1]
+        println(m[1])
+        i += 1
+    end
+end
+```
+
+```{julia}
+function imprimeMatriz(m::Matrix{Int64})
+    i = 1
+    while i < size(m)[1]
+        j = 1
+        while j < size(m)[2]
+            print(m[i, j], " ")
+            j += 1
+        end
+        println()   
+        i += 1
+    end
+end
+
+```
+
+```{julia}
+function preencheMatriz(m::Matrix{Int64})
+    i = 1
+    while i <= length(m)
+        m[i] = rand(Int) % 10
+        i += 1
+    end
+end
+
+```
+
+```{julia}
+function criaIdentidate(tam::Int64)
+    m = zeros(Int64, tam, tam)
+    i = 1
+    while i <= tam
+        m[i, i] = 1
+    end
+    return m  
+end
+```
+
+Operações diretas com matrizes tipo +, - e *
