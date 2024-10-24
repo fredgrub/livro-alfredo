@@ -158,6 +158,7 @@ e o número de pessoas para executar a simulação.
 
 
 ``` {julia}
+#| eval: false
 function experimento_niver(n)
     repetiu = false
     i = 1

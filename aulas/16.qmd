@@ -21,7 +21,7 @@ que v é um vetor de inteiros, ou um array de uma dimensão. Da mesma forma
 
 ```{julia}
 v = zeros(Int64, 3)
-typeof(z)
+typeof(v)
 ```
 
 Mas, vetores podem ser mais flexíveis, como por exemplo abaixo:
@@ -111,7 +111,7 @@ end
 ```
 
 ```{julia}
-function imprimeMatriz(m::Matrix{int64})
+function imprimeMatriz(m::Matrix{Int64})
     println(m)
 end 
 ```

@@ -23,6 +23,11 @@ book:
     - aulas/09.qmd
     - aulas/10.qmd
     - aulas/11.qmd
+    - aulas/12.qmd
+    - aulas/13.qmd
+    - aulas/14.qmd
+    - aulas/15.qmd
+    - aulas/16.qmd
 
 execute:
   cache: true
