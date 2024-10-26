@@ -28,6 +28,7 @@ book:
     - aulas/14.qmd
     - aulas/15.qmd
     - aulas/16.qmd
+    - aulas/17.qmd
 
 execute:
   cache: true
